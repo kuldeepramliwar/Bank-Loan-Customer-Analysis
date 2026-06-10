@@ -1,1 +1,42 @@
 
+CREATE DATABASE BANK_LOAN_STATUS;
+USE BANK_LOAN_STATUS;
+
+#KPI 1 - YEAR WISE TOTAL LOAN AMOUNT
+SELECT SUBSTRING(issue_d, 7, 4) AS Year, SUM(loan_amnt) AS Total_Loan_Amount
+FROM finance1
+GROUP BY SUBSTRING(issue_d, 7, 4)
+ORDER BY SUBSTRING(issue_d, 7, 4);
+
+#KPI 2 - GRADE WISE & SUB GRADE WISE REVOLVING BALANCE
+SELECT f1.grade, f1.sub_grade, SUM(f2.revol_bal) AS Total_Revolving_Balance
+FROM finance1 AS f1
+JOIN finance2 AS f2 ON f1.id = f2.id
+GROUP BY f1.grade, f1.sub_grade
+ORDER BY f1.grade, f1.sub_grade;
+
+#KPI 3 - TOTAL PAYMENT BY VERIFICATION STATUS 
+SELECT f1.verification_status, SUM(f2.total_pymnt) AS Total_Payment
+FROM finance1 f1
+JOIN finance2 f2 ON f1.id = f2.id
+GROUP BY f1.verification_status
+ORDER BY Total_Payment DESC;
+
+#KPI 4 - STATE WISE LOAN STATUS
+SELECT addr_state AS States, COUNT(loan_status) AS Number_of_Loans
+FROM finance1
+GROUP BY addr_state, loan_status
+ORDER BY addr_state, loan_status;
+
+#KPI 5 - HOME OWNERSHIP VS LAST PAYMENT
+SELECT f1.home_ownership AS Home_Ownership, SUM(f2.last_pymnt_amnt) AS Total_Last_Payment
+FROM finance1 f1
+JOIN finance2 f2 ON f1.id = f2.id
+GROUP BY Home_Ownership
+ORDER BY Total_Last_Payment DESC;
+
+#TOTAL NUMBER OF LOANS
+SELECT COUNT(*) FROM finance1;
+SELECT COUNT(*) FROM finance2;
+SELECT COUNT(DISTINCT id) FROM finance1;
+SELECT COUNT(DISTINCT id) FROM finance2;
