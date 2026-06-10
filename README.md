@@ -90,18 +90,3 @@ Banks need to quickly understand:
 - Tableau: Calculated fields, geographic analysis
 - MySQL: Database creation, complex queries
 
-# How to Use This Repository
-
-1. **View SQL Queries** → Go to `SQL_Queries/` folder
-2. **database** → `database/` folder
-3. **See Dashboards** → View screenshots in `Dashboard_Screenshots/`
-4. **Run Queries** → Use MySQL with provided database setup file
-
-# To Run SQL Queries:
-
-```sql
--- Create database
-CREATE DATABASE BANK_LOAN_STATUS;
-USE BANK_LOAN_STATUS;
-
--- Load data and run queries from SQL_Queries folder
